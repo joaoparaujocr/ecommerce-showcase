@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Ecommerce showcase
 
-First, run the development server:
+Este projeto consiste na criação de uma página home para um e-commerce utilizando a API [Platzi Fake Store API](https://fakeapi.platzi.com/). A página listará produtos, permitirá buscas e incluirá um carrinho de compras exibido em um drawer.
+
+## Descrição do Projeto
+
+A aplicação apresenta as seguintes funcionalidades:
+
+- Listagem de produtos em cards contendo imagem, nome, preço e um botão para adicionar ao carrinho.
+- Campo de busca para filtrar produtos pelo nome.
+- Carrinho de compras exibido em um drawer no lado direito da tela, com informações detalhadas dos itens selecionados (nome, imagem, preço, quantidade e botões para aumentar/diminuir quantidade de itens).
+
+## Tecnologias Utilizadas
+
+- [Next.js](https://nextjs.org/docs) ✅
+- [React Query](https://react-query.tanstack.com/) ✅
+- [Zustand](https://zustand.surge.sh/) ✅
+- [Material UI](https://mui.com/) ✅
+- [Cypress](https://www.cypress.io/) ✅
+- [Jest](https://jestjs.io/) 🛠
+
+## Pré-requisitos
+
+Antes de começar, certifique-se de ter o seguinte instalado em sua máquina:
+
+- Node.js (versão 18.x ou superior)
+- pnpm
+
+## Instalação
+
+1. Clone o repositório:
 
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/joaoparaujocr/ecommerce-showcase.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependencias
+```bash
+pnpm install
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Executar a aplicação
+```bash
+pnpm dev
+```
