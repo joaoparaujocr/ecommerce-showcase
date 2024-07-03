@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
 interface SearchInputProps {
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  value: (value: string) => void
 }
 
 const Search = styled('div')(({ theme }) => ({
@@ -49,7 +49,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchInput({ onChange }: SearchInputProps) {
+export default function SearchInput({ value }: SearchInputProps) {
+  const [valueInput, setValueInput] = useState('')
+
+  const setSearchValue = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      value(valueInput)
+    }
+  }
+
+  const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setValueInput(event.target.value)
+  }
+
   return (
     <Search>
       <SearchIconWrapper>
@@ -58,7 +70,8 @@ export default function SearchInput({ onChange }: SearchInputProps) {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
-        onChange={onChange}
+        onChange={onChangeValue}
+        onKeyDownCapture={setSearchValue}
       />
     </Search>
   );

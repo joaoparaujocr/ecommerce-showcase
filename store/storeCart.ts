@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { Product } from '../interfaces/Product'
+import { StaticImageData } from 'next/dist/shared/lib/get-img-props'
 
-export type Item = Pick<Product, 'id' | 'price' | 'title'> & { amount: number, totalPrice: number, image: string }
+export type Item = Pick<Product, 'id' | 'price' | 'title'> & { amount: number, totalPrice: number, image: string | StaticImageData }
 
 type CartState = {
   items: Item[]

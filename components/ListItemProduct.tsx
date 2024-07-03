@@ -20,8 +20,8 @@ export default function ListItemProduct({ title, price, description, images, id 
     <Grid container item sx={{ width: 'unset' }} flexDirection="column">
       <Stack maxWidth={240} gap={1}>
         <Stack padding="unset" position="relative">
-          <Image alt={description} style={{ borderRadius: '8px' }} src={validImage} width={240} height={240}/>
-          <Fab size="small" sx={{ position: 'absolute', right: -4, bottom: -10 }} onClick={() => addItemToCart({ id, price, image, title })}>
+          <Image alt={description} style={{ borderRadius: '8px' }} src={validImage} width={240} height={240} />
+          <Fab size="small" sx={{ position: 'absolute', right: -4, bottom: -10 }} onClick={() => addItemToCart({ id, price, image: validImage, title })}>
             <AddShoppingCartIcon />
           </Fab>
         </Stack>

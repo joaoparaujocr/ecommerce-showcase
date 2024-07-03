@@ -1,6 +1,7 @@
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { ReactNode } from 'react'
+import Stack from '@mui/material/Stack'
 
 interface LayoutProps {
   children: ReactNode
@@ -8,11 +9,12 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <>
+    <Stack sx={{ minHeight: '100vh' }}>
       <Navbar />
-      <main>
-        {children} 
+      <main style={{ flex: 1 }}>
+        {children}
       </main>
-    </>
+      <Footer />
+    </Stack>
   )
 }
