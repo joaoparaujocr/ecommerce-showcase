@@ -27,7 +27,7 @@ const DrawerCart = ({ items, onClose, open }: DrawerCartProps) => {
       }}
     >
       <Box sx={{ width: 350, padding: '16px 24px' }} position="relative" flexDirection="column" justifyContent="space-between">
-        <IconButton sx={{ position: 'absolute', top: 4, left: 4 }} onClick={onClose}>
+        <IconButton sx={{ position: 'absolute', top: 4, left: 4 }} onClick={onClose} data-testid="close-cart">
           <CloseIcon />
         </IconButton>
         <Stack>
@@ -41,7 +41,7 @@ const DrawerCart = ({ items, onClose, open }: DrawerCartProps) => {
                 {items.map(item => <ListItemCart {...item} />)}
               </List>
             ) :
-              <Typography textAlign="center">Seu carrinho está vazio</Typography>
+              <Typography textAlign="center" data-testid="empty-cart">Seu carrinho está vazio</Typography>
             }
           </Stack>
         </Stack>

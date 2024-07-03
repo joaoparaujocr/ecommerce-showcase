@@ -39,12 +39,13 @@ export default function DrawerAppBar() {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1 }}
+            data-testid="title-page"
           >
             E-commerce
           </Typography>
           <Box sx={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
             <SearchInput value={setSearch} />
-            <IconButton color="primary" onClick={openDrawer}>
+            <IconButton color="primary" onClick={openDrawer} data-testid="button-cart">
               <Badge badgeContent={items.length} color="secondary">
                 <ShoppingCartIcon />
               </Badge>

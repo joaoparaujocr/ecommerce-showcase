@@ -31,7 +31,7 @@ export default function Home() {
       <Box sx={{ flexGrow: 1, marginTop: '84px' }}>
         <Grid container spacing={2} justifyContent="center" alignItems={isLoading ? 'center' : 'unset'}>
           {isLoading ? (
-            <Box sx={{ display: 'flex' }}>
+            <Box data-testid="loading" sx={{ display: 'flex' }}>
               <CircularProgress />
             </Box>
           ) : productsSearch?.data.map(product => (
