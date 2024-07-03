@@ -21,7 +21,7 @@ export default function Home() {
   }, [router.query])
 
   const { data: productsSearch, isLoading } = useQuery({
-    queryKey: [QUERY_KEYS, search],
+    queryKey: [QUERY_KEYS.products, search],
     queryFn: () => getProducts({ params: { title: search } })
   })
 
