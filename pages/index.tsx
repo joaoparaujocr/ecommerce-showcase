@@ -1,4 +1,3 @@
-import type { InferGetStaticPropsType } from 'next'
 import { getProducts } from '../axios'
 import Layout from '../components/Layout'
 import Grid from '@mui/material/Grid'
