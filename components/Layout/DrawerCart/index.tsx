@@ -2,10 +2,11 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Drawer from '@mui/material/Drawer'
-import { Button, Divider, List, Stack } from '@mui/material'
+import { Button, Divider, IconButton, List, Stack } from '@mui/material'
 import { formatNumberToReal } from '../../../lib/formatNumberToReal'
 import ListItemCart from './ListItemCart'
 import useStoreCart, { Item } from '../../../store/storeCart'
+import CloseIcon from '@mui/icons-material/Close';
 
 interface DrawerCartProps {
   open: boolean
@@ -25,7 +26,10 @@ const DrawerCart = ({ items, onClose, open }: DrawerCartProps) => {
         sx: { justifyContent: 'space-between' }
       }}
     >
-      <Box sx={{ width: 350, padding: '16px 24px' }} flexDirection="column" justifyContent="space-between">
+      <Box sx={{ width: 350, padding: '16px 24px' }} position="relative" flexDirection="column" justifyContent="space-between">
+        <IconButton sx={{ position: 'absolute', top: 4, left: 4 }} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
         <Stack>
           <Typography component="h2" sx={{ fontSize: '2rem', textAlign: 'center' }}>
             Meu carrinho

@@ -1,7 +1,8 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { useRouter } from 'next/router';
 
 interface SearchInputProps {
   value: (value: string) => void
@@ -50,11 +51,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchInput({ value }: SearchInputProps) {
-  const [valueInput, setValueInput] = useState('')
+  const router = useRouter()
+  const [valueInput, setValueInput] = useState(router.query.title as string ?? '')
 
   const setSearchValue = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
       value(valueInput)
+      router.push({
+        query: {
+          title: valueInput
+        }
+      });
     }
   }
 
@@ -72,6 +79,7 @@ export default function SearchInput({ value }: SearchInputProps) {
         inputProps={{ 'aria-label': 'search' }}
         onChange={onChangeValue}
         onKeyDownCapture={setSearchValue}
+        defaultValue={valueInput}
       />
     </Search>
   );
