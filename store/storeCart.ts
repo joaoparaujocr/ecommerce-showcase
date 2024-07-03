@@ -23,16 +23,18 @@ const useStoreCart = create<CartStore>((set) => ({
   addItemToCart: (addItem: Omit<Item, 'amount' | 'totalPrice'>) => {
     set((state) => {
       const previousItems = state.items
-      const searchItemIndex = previousItems.findIndex((item) => item.id === addItem.id)
+      const alreadyExists = previousItems.find((item) => item.id === addItem.id)
 
-      if (searchItemIndex >= 0) {
-        const oldItem = previousItems[searchItemIndex];
-        const amountItems = oldItem.amount + 1
-        const newItem: Item = { ...oldItem, amount: amountItems, totalPrice: oldItem.price * (amountItems) }
+      if (alreadyExists) {
+        const amountItems = alreadyExists.amount + 1
+        const newItems = previousItems.map(item => {
+          if (item.id === addItem.id) {
+            return { ...item, amount: amountItems, totalPrice: alreadyExists.price * amountItems }
+          }
+          return item;
+        })
 
-        previousItems.splice(searchItemIndex, 1, newItem)
-
-        return { ...state, items: previousItems }
+        return { ...state, items: newItems }
       }
 
       return { ...state, items: [...previousItems, { ...addItem, amount: 1, totalPrice: addItem.price }] }
@@ -41,34 +43,50 @@ const useStoreCart = create<CartStore>((set) => ({
   addOneMoreUnit: (id: number) => {
     set((state) => {
       const previousItems = state.items
-      const searchItemIndex = previousItems.findIndex((item) => item.id === id)
+      const searchItem = previousItems.find((item) => item.id === id)
 
-      const oldItem = previousItems[searchItemIndex];
-      const amountItems = oldItem.amount + 1
-      const newItem: Item = { ...oldItem, amount: amountItems, totalPrice: oldItem.price * (amountItems) }
+      if (searchItem) {
+        const amountItems = searchItem.amount + 1
+        const newItems = previousItems.map(item => {
+          if (item.id === id) {
+            return { ...item, amount: amountItems }
+          }
 
-      previousItems.splice(searchItemIndex, 1, newItem)
+          return item
+        })
 
-      return { ...state, items: previousItems }
+        return { ...state, items: newItems }
+      }
+
+      return { ...state }
     })
   },
   removeOneUnit: (id: number) => {
     set((state) => {
       const previousItems = state.items
-      const searchItemIndex = previousItems.findIndex((item) => item.id === id)
+      const searchItem = previousItems.find((item) => item.id === id)
 
-      const oldItem = previousItems[searchItemIndex];
-      const amountItems = oldItem.amount - 1
+      if (searchItem) {
+        const amountItems = searchItem.amount - 1
 
-      if (amountItems <= 0) {
-        previousItems.splice(searchItemIndex, 1)
-        return { ...state, items: previousItems }
+        if (amountItems <= 0) {
+          const newItems = previousItems.filter(item => item.id !== id)
+
+          return { ...state, items: newItems }
+        }
+
+        const newItems = previousItems.map(item => {
+          if (item.id === id) {
+            return { ...item, amount: amountItems }
+          }
+
+          return item
+        })
+
+        return { ...state, items: newItems }
       }
 
-      const newItem: Item = { ...oldItem, amount: amountItems, totalPrice: oldItem.price * (amountItems) }
-      previousItems.splice(searchItemIndex, 1, newItem)
-
-      return { ...state, items: previousItems }
+      return { ...state }
     })
   },
   removeItem: (id: number) => {
@@ -79,7 +97,6 @@ const useStoreCart = create<CartStore>((set) => ({
     })
   },
   cleanCart: () => set((state) => ({ ...state, items: [] }))
-
 }));
 
 export default useStoreCart;
