@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from 'react';
 import { formatNumberToReal } from '../../lib/formatNumberToReal';
+import useStoreSearch from '../../store/storeSearch';
 
 const ListItemCart = ({ image, title, amount, id}: Item) => {
   const { addOneMoreUnit, removeOneUnit, removeItem } = useStoreCart(state => state)
@@ -50,11 +51,16 @@ const ListItemCart = ({ image, title, amount, id}: Item) => {
 
 export default function DrawerAppBar() {
   const { items, cleanCart } = useStoreCart(state => state)
+  const { changeSearch } = useStoreSearch(state => state)
   const [openCart, setOpenCart] = useState(false)
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    changeSearch(event.target.value)
+  }
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setMobileOpen((prevState) => !prevState)
   };
 
   const closeDrawer = () => {
@@ -87,7 +93,7 @@ export default function DrawerAppBar() {
             MUI
           </Typography>
           <Box sx={{ display: 'flex', gap: '10px' }}>
-            <SearchInput />
+            <SearchInput onChange={onChangeSearch} />
             <IconButton color="primary" onClick={openDrawer}>
               <Badge badgeContent={items.length} color="secondary">
                 <ShoppingCartIcon />
