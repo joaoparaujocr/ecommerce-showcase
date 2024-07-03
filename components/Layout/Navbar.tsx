@@ -40,7 +40,7 @@ export default function DrawerAppBar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            MUI
+            E-commerce
           </Typography>
           <Box sx={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
             <SearchInput value={setSearch} />
